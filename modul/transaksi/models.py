@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 # Create your models here.
+#model untuk tabel jns_akun dan  jns angsuran
 
 class Akun(models.Model):
     PILIHAN_AKUN = (
@@ -13,6 +14,7 @@ class Akun(models.Model):
         ('PENDAPATAN','PENDAPATAN'),
         ('HPP','HPP'),
         ('BIAYA','BIAYA'),
+        ('PINJAMAN','PINJAMAN')
     )
     YA_TIDAK = (
         ('Y', 'YA'),
@@ -29,3 +31,14 @@ class Akun(models.Model):
 
     class Meta:
         db_table = 'jns_akun'
+
+class Angsuran(models.Model):
+    YA_TIDAK = (
+        ('Y', 'YA'),
+        ('N', 'TIDAK')
+    )
+    keterangan = models.IntegerField(db_column='ket')
+    aktif = models.CharField(max_length=2, choices=YA_TIDAK)
+
+    class Meta:
+        db_table = 'jns_angsuran'
