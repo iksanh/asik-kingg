@@ -22,4 +22,7 @@ urlpatterns = [
     path('api-simpanan/', include('modul.simpanan.api.urls')),
     path('api-transaksi/', include('modul.transaksi.api.urls')),
     path('api-kas/', include('modul.kas.api.urls')),
+    path('', include('modul.urls')),
+
+    path('simpanan/', include('modul.simpanan.urls'))
 ]

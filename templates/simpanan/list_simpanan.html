@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<h3>Daftar Simpanan</h3>
+<a href="{% url 'create-simpanan'%}" class="btn btn-danger">Tambah Data</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Jenis Simpanan</th>
+      <th scope="col">Jumlah</th>
+      <th scope="col">Tampil</th>
+      <th scope="col">Keterangan</th>
+      <th scope="col">Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for simpan in simpanan %}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{simpan.jenis_simpanan}}</td>
+      <td>{{simpan.jumlah}}</td>
+      <td>{{simpan.tampil}}</td>
+      <td>{{simpan.keterangan}}</td>
+      <td>
+        <a href="{% url 'edit-simpanan' simpan.id %}" class="nav-link px-0"> <i class="bi bi-pencil-square"></i> </a>
+        <a href="{% url 'delete-simpanan' simpan.id %}" class="nav-link px-0"> <i class="bi bi-trash"></i> </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content%}
