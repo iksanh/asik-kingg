@@ -46,3 +46,6 @@ def delete_simpanan(request, id):
     simpanan = get_object_or_404(Simpanan, id=id)
     simpanan.delete()
     return redirect('simpanan')
+
+def tes(request):
+    return render(request, 'simpanan/login.html', context={'data': 'data'})

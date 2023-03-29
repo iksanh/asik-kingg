@@ -7,5 +7,6 @@ urlpatterns = [
     path('', view.list_simpanan, name = 'simpanan'),
     path('create/', view.create_simpanan, name = 'create-simpanan'),
     path('edit/<int:id>/', view.edit_simpanan, name = 'edit-simpanan'),
-    path('delete/<int:id>/', view.delete_simpanan, name = 'delete-simpanan')
+    path('delete/<int:id>/', view.delete_simpanan, name = 'delete-simpanan'),
+    path('test', view.tes, name = 'test')
 ]

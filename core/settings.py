@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     #thirdpary
     'rest_framework',
+    'crispy_forms',
+    "crispy_bootstrap5",
+
     #app
     'modul.member',
     'modul.settings',
@@ -49,6 +52,10 @@ INSTALLED_APPS = [
     'modul'
 
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
