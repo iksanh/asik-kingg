@@ -24,5 +24,6 @@ urlpatterns = [
     path('api-kas/', include('modul.kas.api.urls')),
     path('', include('modul.urls')),
 
-    path('simpanan/', include('modul.simpanan.urls'))
+    path('simpanan/', include('modul.simpanan.urls')),
+    path('', include('modul.users.urls'))
 ]

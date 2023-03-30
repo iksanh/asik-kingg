@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'modul.transaksi',
     'modul.simpanan',
     'modul.kas',
+    'modul.users',
     'modul'
 
 ]
@@ -68,7 +69,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
-
+LOGIN_URL = 'login'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

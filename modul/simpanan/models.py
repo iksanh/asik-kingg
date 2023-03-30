@@ -5,8 +5,8 @@ from django.utils.translation import gettext_lazy as _
 
 class Simpanan(models.Model):
     class Opsi(models.TextChoices):
-        YA = 'Y', _('Y')
-        TIDAK = 'N',_('N')
+        YA = 'Y', _('YA')
+        TIDAK = 'N',_('TIDAK')
 
     jenis_simpanan = models.CharField(max_length=30, db_column='jns_simpanan')
     jumlah = models.BigIntegerField()
