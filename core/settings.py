@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'modul.simpanan',
     'modul.kas',
     'modul.users',
+    'modul.pinjaman',
     'modul'
 
 ]
