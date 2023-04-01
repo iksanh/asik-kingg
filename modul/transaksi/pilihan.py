@@ -1,25 +1,20 @@
 from django_enumfield import enum
 
-class Akun(enum.Enum):
-    AKTIVA = 'Aktiva'
-    PASIVA = 'Pasiva'
-    KOSONG = 'NULL'
+class Opsi():
+    PILIHAN_AKUN = (
+        ('Aktiva', 'AKTIVA'),
+        ('Pasiva', 'PASIVA')
+    )
 
-class LabaRugi(enum.Enum):
-    PENDAPATAN = 'PENDAPATAN'
-    HPP = 'HPP'
-    BIAYA = 'BIAYA'
+    LABA_RUGI = (
+        ('PENDAPATAN', 'PENDAPATAN'),
+        ('HPP', 'HPP'),
+        ('BIAYA', 'BIAYA'),
+        ('PINJAMAN', 'PINJAMAN')
+    )
 
-class Pemasukan(enum.Enum):
-    YA = 'Y'
-    TIDAK = 'N'
-    KOSONG = 'NULL'
+    YA_TIDAK = (
+        ('Y', 'YA'),
+        ('N', 'TIDAK')
+    )
 
-class Pengeluaran(enum.Enum):
-    YA = 'Y'
-    TIDAK = 'N'
-    KOSONG = 'NULL'
-
-class Aktif(enum.Enum):
-    YA = 'Y'
-    TIDAK = 'N'
