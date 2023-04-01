@@ -6,7 +6,7 @@
   <div class="card-header fw-bolder fs-6 d-grid gap-2 d-md-flex justify-content-between align-items-center">
       <p>Buat  Data Trasaksi</p>
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a href="{% url 'simpanan'%}" class="btn btn-outline-danger   btn-sm  ">Data Transaksi</a>
+    <a href="{% url 'akun'%}" class="btn btn-outline-danger   btn-sm  ">Data Transaksi</a>
           </div>
 
   </div>
@@ -14,7 +14,7 @@
 
 <form method="POST" novalidate>
  {% csrf_token %}
-    {{simpanan_form|crispy}}
+    {{form|crispy}}
     <div class="d-flex justify-content-between d-md-block">
     <button class="btn btn-danger btn-sm px-5" type="submit">Simpan</button>
     <button class="btn btn-outline-danger btn-sm px-5 " type="reset">Reset</button>

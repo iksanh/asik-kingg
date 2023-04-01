@@ -26,6 +26,30 @@ def create_akun(request):
         else:
             return render(request, template_create, {'form': form})
 
+def delete_akun(request, id):
+    akun = get_object_or_404(Akun, id= id)
+    akun.delete()
+    return redirect('akun')
+
+def edit_akun(request, id):
+    template_create = 'transaksi/akun/create_akun.html'
+    akun = get_object_or_404(Akun, id=id)
+
+    context = {
+        'form': AkunForm(instance=akun),
+        'id': id
+    }
+    if request.method == 'GET':
+        return render(request, template_create,  context)
+
+    elif request.method == 'POST':
+        form = AkunForm(request.POST, instance=akun)
+        if form.is_valid():
+            form.save()
+            return redirect('akun')
+        else:
+            return render(request, template_create, {'form', form})
+
 
 
 

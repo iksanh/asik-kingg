@@ -25,5 +25,6 @@ urlpatterns = [
     path('', include('modul.urls')),
 
     path('simpanan/', include('modul.simpanan.urls')),
-    path('', include('modul.users.urls'))
+    path('', include('modul.users.urls')),
+    path('akun/', include('modul.transaksi.urls'))
 ]
