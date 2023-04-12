@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+
+{% block content%}
+
+<!--<p class="fw-bold fs-4 my-3 fw-light fw-bolder">SIMPANAN</p>-->
+<h3 class="px-3 pt-3 ">User</h3>
+<hr class="shadow-sm">
+ <div class="card shadow-sm my-3">
+
+
+
+                <div class="card-body">
+
+<a href="{% url links.create %}" class="btn btn-danger btn-sm mb-4 px-4"><i class="bi bi-plus-lg"></i> Tambah Data</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nama User</th>
+      <th scope="col">Group </th>
+      <th scope="col">Aksi</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in data %}
+    <tr>
+      <th scope="row">#</th>
+      <td>{{user.username}}</td>
+
+      <td>
+
+
+{% for group in user.groups.all %}
+{{ group.name }}
+          {% empty %}
+          belum ada group
+{% endfor %}
+
+      </td>
+
+
+      <td class="d-flex p-2 gap-3">
+        <a href="" class="nav-link px-0"> <i class="bi bi-pencil-square"></i> </a>
+        <a href="" class="nav-link px-0"> <i class="bi bi-trash"></i> </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+                </div>
+            </div>
+
+{% endblock content%}

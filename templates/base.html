@@ -17,14 +17,14 @@
   <body>
 <div class="container-fluid">
     <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 shadow-sm bg-white navigation fw-bolder">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 shadow-sm bg-white navigation ">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100 menu">
                 <a href="{% url 'dashboard'%}" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-denger text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline ">Menu</span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
+                        <a href="{% url 'dashboard'%}" class="nav-link align-middle px-0">
                             <i class="bi bi-house-fill "></i> <span class="ms-1 d-none d-sm-inline">Home</span>
                         </a>
                     </li>
@@ -40,10 +40,10 @@
                                 <a href="{% url 'akun'%}" class="nav-link px-0"> <span class="d-none d-sm-inline">Jenis Akun</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Jenis Pinjaman</span></a>
+                                <a href="{% url 'pinjaman'%}" class="nav-link px-0"> <span class="d-none d-sm-inline">Jenis Pinjaman</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Data Kas</span></a>
+                                <a href="{% url 'kas' %}" class="nav-link px-0"> <span class="d-none d-sm-inline">Data Kas</span></a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Data Anggota</span></a>
@@ -113,7 +113,27 @@
                         <a href="#" class="nav-link px-0 align-middle">
                             <i class="bi bi-file-earmark-bar-graph"></i> <span class="ms-1 d-none d-sm-inline">Grafik</span></a>
                     </li>
-                    <li>
+
+                     <li>
+                        <a href="#user" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+                            <i class="bi bi-gear"></i></i><span class="ms-1 d-none d-sm-inline"> Pengaturan</span> </a>
+                            <ul class="collapse nav flex-column ms-1" id="user" data-bs-parent="#menu">
+                            <li class="w-100">
+                                <a href="{% url 'users'%}" class="nav-link px-3"><i class="bi bi-person"></i> <span class="d-none d-sm-inline">User</span></a>
+                            </li>
+                            <li>
+                                <a href="{% url 'group'%}" class="nav-link px-3"><i class="bi bi-people"></i> <span class="d-none d-sm-inline">Group</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-3"><i class="bi bi-person-lock"></i> <span class="d-none d-sm-inline">Hak Akses</span></a>
+                            </li>
+                            <li>
+                                <a href="#" class="nav-link px-3"><i class="bi bi-app"></i> <span class="d-none d-sm-inline">Aplikasi</span></a>
+                            </li>
+
+                        </ul>
+                    </li>
+                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
                             <i class="bi bi-info-circle"></i> <span class="ms-1 d-none d-sm-inline">Tentang</span></a>
                     </li>
@@ -122,19 +142,38 @@
                             <i class="bi bi-box-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Keluar</span></a>
                         
                     </li>
+
                 </ul>
                 <hr>
 
             </div>
         </div>
-        <div class="col py-3  bg-light">
-            <div class="card shadow-sm">
+        <div class="col pt-1 bg-light">
+
+            <div class="bg-white d-flex align-items-center shadow-sm">
                 <div class="card-body fs-8 fw-light fw-bolder">
                 KOPERASI  INTERNET NETWORK GORONTALO
                 </div>
+                <div class="dropdown">
+  <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        Hi {{request.user.username}}
+  </a>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="#">Profile Saya</a></li>
+    <li><a class="dropdown-item" href="{% url 'logout' %}">Keluar</a></li>
+
+  </ul>
+</div>
+                <span class="pe-4">
+
+                </span>
             </div>
-          {% block content %}
+                {% block content %}
           {% endblock content %}
+
+
+
         </div>
     </div>
 </div>

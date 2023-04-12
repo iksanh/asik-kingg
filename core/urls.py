@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
@@ -26,5 +28,10 @@ urlpatterns = [
 
     path('simpanan/', include('modul.simpanan.urls')),
     path('', include('modul.users.urls')),
-    path('akun/', include('modul.transaksi.urls'))
+    path('group/', include('modul.group.urls')),
+    path('akun/', include('modul.transaksi.urls')),
+    path('pinjaman/', include('modul.pinjaman.urls')),
+    path('kas/', include('modul.kas.urls')),
+
+
 ]

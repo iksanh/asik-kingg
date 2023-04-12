@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+<!--<p class="fw-bold fs-4 my-3 fw-light fw-bolder">SIMPANAN</p>-->
+ <div class="card shadow-sm my-3">
+   <div class="card-header fw-bolder fs-6">
+    PINJAMAN
+  </div>
+                <div class="card-body">
+
+<a href="{% url links.create %}" class="btn btn-danger btn-sm mb-4 px-4"><i class="bi bi-plus-lg"></i> Tambah Data</a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nama Group</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for group in data %}
+    <tr>
+      <th scope="row">#</th>
+      <td>{{group.name}}</td>
+
+      <td class="d-flex p-2 gap-3">
+        <a href="{% url 'edit-group'  group.id %}" class="nav-link px-0"> <i class="bi bi-pencil-square"></i> </a>
+        <a href="" class="nav-link px-0"> <i class="bi bi-trash"></i> </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+                </div>
+            </div>
+
+{% endblock content%}

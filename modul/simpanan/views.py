@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-# from modul.simpanan.models import Simpanan
+from django.contrib.auth.decorators import permission_required
+
+
 from .forms import SimpananForm, Simpanan
 
 # Create your views here.
 
+@permission_required('view_akun')
 def list_simpanan(request):
     simpanan_data = Simpanan.objects.all()
     context = {

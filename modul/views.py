@@ -12,3 +12,5 @@ def index(request):
 
     return render(request, 'dashboard.html', context)
 
+def forbidden(request, exception):
+    return render(request, 'forbidden.html', status=403)
