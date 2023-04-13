@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'modul.kas',
     'modul.users',
     'modul.pinjaman',
+    'modul.permissions',
     'modul'
 
 ]

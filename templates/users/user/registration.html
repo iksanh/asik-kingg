@@ -14,7 +14,15 @@
 
 <form method="POST" novalidate>
  {% csrf_token %}
-    {{form|crispy}}
+
+    {% for field in form %}
+       {{field|as_crispy_field}}
+        {% if field.errors %}
+	        		<small class="error">{{ field.errors|striptags  }}</small>
+	        	{% endif %}
+        {% endfor %}
+
+
     <div class="d-flex justify-content-between d-md-block">
     <button class="btn btn-danger btn-sm px-5" type="submit">Simpan</button>
     <button class="btn btn-outline-danger btn-sm px-5 " type="reset">Reset</button>
