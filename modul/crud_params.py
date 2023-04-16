@@ -13,8 +13,9 @@ class CrudParams:
                 "create": 'create-'+self._modul,
                 "edit": 'edit-'+self._modul,
                 "delete": 'delete-'+self._modul,
+                "list": 'list-'+self._modul
             }
         }
 
 
-print(CrudParams('Pinjaman').params)
+# print(CrudParams('Pinjaman').params)
