@@ -15,6 +15,7 @@
       <th scope="col">#</th>
       <th scope="col">Nama User</th>
       <th scope="col">Group </th>
+      <th scope="col">Status </th>
       <th scope="col">Aksi</th>
 
     </tr>
@@ -36,11 +37,25 @@
 {% endfor %}
 
       </td>
+        <th scope="col">
+
+            {% if user.is_active%}
+                aktif
+            {% else %}
+            tidak aktif
+            {% endif%}
+            </th>
 
 
       <td class="d-flex p-2 gap-3">
-        <a href="" class="nav-link px-0"> <i class="bi bi-pencil-square"></i> </a>
-        <a href="" class="nav-link px-0"> <i class="bi bi-trash"></i> </a>
+        <a href="{% url 'edit-users' user.id %}" class="nav-link px-0"> <i class="bi bi-pencil-square"></i> </a>
+        <a href="{% url 'inactive_user' user.id %}" class="nav-link px-0">
+            {% if user.is_active%}
+                <i class="bi bi-eye"  data-bs-toggle="tooltip" data-bs-placement="right" title="Tooltip on right"></i> </a>
+            {% else %}
+            <i class="bi bi-eye-slash"></i></a>
+            {% endif%}
+
       </td>
     </tr>
     {% endfor %}
