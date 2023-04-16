@@ -1,27 +1,23 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, FormView
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import Group
 from .forms import RegisterGropForm
+from modul.crud_params import CrudParams
 
 # Create your views here.
-modul_group = 'group'
-class MyGroupView(PermissionRequiredMixin,ListView):
+modul = CrudParams('group')
+
+class MyGroupView(ListView):
     #add permission
     permission_required = 'group.add_group'
     model = Group
     template_name = 'users/group/list_group.html'
     context_object_name = 'data'
 
-    extra_context = {
-        'links': {
-            'list': modul_group,
-            'edit': 'edit-' + modul_group,
-            'delete': 'delete-' + modul_group,
-            'create': 'create-' + modul_group
-        }
-    }
+    extra_context = modul.params
 
 
 class MyGroupCreateView(FormView):
@@ -31,18 +27,9 @@ class MyGroupCreateView(FormView):
     form_class = RegisterGropForm
     context_object_name = 'form'
     success_url = reverse_lazy('group')
-    extra_context = {
-        'modul' : modul_group,
-        'links': {
-            'list': modul_group,
-            'edit': 'edit-' + modul_group,
-            'delete': 'delete-' + modul_group,
-            'create': 'create-' + modul_group
-        }
-    }
+    extra_context = modul.params
     def form_valid(self, form):
         group = form.save()
-
         form.instance.user = self.request.user
         return super(MyGroupCreateView,self).form_valid(form)
 
@@ -53,15 +40,7 @@ class MyGroupUpdateView(UpdateView):
 
     success_url = reverse_lazy('group')
 
-    extra_context = {
-        'modul': modul_group,
-        'links': {
-            'list': modul_group,
-            'edit': 'edit-' + modul_group,
-            'delete': 'delete-' + modul_group,
-            'create': 'create-' + modul_group
-        }
-    }
+    extra_context = modul.params
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -74,4 +53,9 @@ class MyGroupUpdateView(UpdateView):
         self.object.save()
         return super().form_valid(form)
 
+
+def delete_group(request, id):
+    group = get_object_or_404(Group, id=id)
+    group.delete()
+    return redirect('group')
 
