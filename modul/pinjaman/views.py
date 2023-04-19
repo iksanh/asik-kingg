@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PinjamanForm, Pinjaman
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 
 
 
@@ -9,12 +9,10 @@ template_create = 'pinjaman/create_pinjaman.html'
 template_list = 'pinjaman/list_pinjaman.html'
 # Create your views here.
 
-def is_bendahara(user):
-    return user.groups.filter(name='bendahara').exists()
 
 
 #function list pinjaman
-@user_passes_test(is_bendahara)
+@permission_required('pinjaman.view_pinjaman')
 def list_pinjaman(request):
     pinjaman  = Pinjaman.objects.all()
     context = {
@@ -22,7 +20,8 @@ def list_pinjaman(request):
     }
     return render(request, template_list, context)
 
-@login_required()
+
+@permission_required('pinjaman.add_pinjaman')
 def create_pinjaman(request):
     #get form
     if request.method == 'GET':

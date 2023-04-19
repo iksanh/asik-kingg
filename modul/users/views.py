@@ -2,11 +2,11 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.models import Group, Permission, PermissionManager, User
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from django.views.generic.edit import FormView, UpdateView
 
-from .forms import RegisterUserForm
+from .forms import RegisterUserForm, UpdateUserGroupForm
 from django.contrib.auth import login
 
 from django.views.generic import ListView, CreateView, DetailView, DeleteView
@@ -23,13 +23,27 @@ modul_group = 'group'
 
 class MyLoginView(LoginView):
     redirect_authenticated_user = True
+    success_url = reverse_lazy('dashboard')
 
     def get_success_url(self):
-        return reverse_lazy('dashboard')
+        #get param next in url
+        next_url= self.request.GET.get('next')
+        return next_url if next_url else reverse_lazy('dashboard')
+
 
     def form_invalid(self, form):
         messages.error(self.request, "Username atau Password salah")
         return self.render_to_response(self.get_context_data(form=form))
+    def form_valid(self, form):
+        # Check the POST request fields
+        #username = form.cleaned_data.get('username')
+        # email = form.cleaned_data.get('email')
+        #password = form.cleaned_data.get('password')
+        #print(username, password)
+
+        # Do something with the form data
+
+        return super().form_valid(form)
 
 
 class MyUserView(ListView):
@@ -59,10 +73,13 @@ class MyUserRegistrationView(PermissionRequiredMixin, FormView): #PermissionRequ
 
 class MyUserUpdateView(UpdateView):
     model = User
-    form_class = RegisterUserForm
+    # form_class = RegisterUserForm
+
     template_name = 'users/user/registration.html'
     extra_context = modul.params
 
+    def get_form_class(self):
+        return RegisterUserForm
     def get_success_url(self):
         return reverse_lazy('users')
 
@@ -74,12 +91,22 @@ class MyUserUpdateView(UpdateView):
     def form_valid(self, form):
         return super(MyUserUpdateView, self).form_valid(form)
 
+class MyUserUpdateGroup(MyUserUpdateView):
+    def get_form_class(self):
+        return UpdateUserGroupForm
+
+
+
+
+
 def inactive_user(request, id):
 
     user = User.objects.filter(id = id)
+    # print(User.objects.get(user))
     if request.method == 'GET':
-        user.update(is_active = False)
-        print(user)
+        print(User.objects.get(id = id).is_active)
+        user.update(is_active = False) if User.objects.get(id = id).is_active else user.update(is_active = True)
+
         return redirect('users')
 
 

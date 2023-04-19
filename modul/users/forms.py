@@ -24,6 +24,23 @@ class RegisterUserForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'groups')
 
+class UpdateUserGroupForm(forms.ModelForm):
+    qs_group = Group.objects.all()
+    groups = forms.ModelMultipleChoiceField(queryset=qs_group, widget=forms.CheckboxSelectMultiple, required=False)
+    username = forms.CharField(disabled= True)
+
+    class Meta:
+        model = User
+        fields = ('username','groups',)
+
+
+
+
+
+
+
+
+
 
 
 

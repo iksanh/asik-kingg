@@ -48,7 +48,11 @@
 
 
       <td class="d-flex p-2 gap-3">
+
         <a href="{% url 'edit-users' user.id %}" class="nav-link px-0"> <i class="bi bi-pencil-square"></i> </a>
+
+        <a href="{% url 'edit-group-users' user.id %}" class="nav-link px-0"> <i class="bi bi-people"></i> </a>
+
         <a href="{% url 'inactive_user' user.id %}" class="nav-link px-0">
             {% if user.is_active%}
                 <i class="bi bi-eye"  data-bs-toggle="tooltip" data-bs-placement="right" title="Tooltip on right"></i> </a>

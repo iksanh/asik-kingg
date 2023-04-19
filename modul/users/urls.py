@@ -1,5 +1,5 @@
 from django.urls import  path
-from .views import MyLoginView,  MyPermisionView,  MyUserView, MyUserRegistrationView, MyUserUpdateView, inactive_user
+from .views import MyLoginView,  MyPermisionView,  MyUserView, MyUserRegistrationView, MyUserUpdateView, inactive_user, MyUserUpdateGroup
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
@@ -9,7 +9,7 @@ urlpatterns = [
     path('create', MyUserRegistrationView.as_view(), name='create-users'),
     path('<int:pk>/edit/', MyUserUpdateView.as_view(), name='edit-users'),
     path('<int:id>/status', inactive_user, name = 'inactive_user' ),
-    # path('<int:id>/edit/', user_update, name='edit-users'),
+    path('<int:pk>/group', MyUserUpdateGroup.as_view(), name='edit-group-users'),
 
     path('user/permission', MyPermisionView.as_view(), name='user-permission')
 ]

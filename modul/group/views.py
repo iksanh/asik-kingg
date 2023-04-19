@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, UpdateView, CreateView, FormView
+from django.views.generic import ListView, UpdateView, CreateView, FormView, DeleteView
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.models import Group
 from .forms import RegisterGropForm
@@ -10,7 +11,7 @@ from modul.crud_params import CrudParams
 # Create your views here.
 modul = CrudParams('group')
 
-class MyGroupView(ListView):
+class MyGroupView(PermissionRequiredMixin, ListView):
     #add permission
     permission_required = 'group.add_group'
     model = Group
@@ -20,7 +21,7 @@ class MyGroupView(ListView):
     extra_context = modul.params
 
 
-class MyGroupCreateView(FormView):
+class MyGroupCreateView(PermissionRequiredMixin, FormView):
     model = Group
     template_name ='users/group/create_group.html'
     permission_required = 'group.view_group'
@@ -33,7 +34,8 @@ class MyGroupCreateView(FormView):
         form.instance.user = self.request.user
         return super(MyGroupCreateView,self).form_valid(form)
 
-class MyGroupUpdateView(UpdateView):
+class MyGroupUpdateView(PermissionRequiredMixin,UpdateView):
+    permission_required = 'group.change_group'
     model = Group
     form_class = RegisterGropForm
     template_name ='users/group/create_group.html'
@@ -53,8 +55,9 @@ class MyGroupUpdateView(UpdateView):
         self.object.save()
         return super().form_valid(form)
 
-
+@permission_required('group.delete_group')
 def delete_group(request, id):
+    permission_required = 'delete.change_group'
     group = get_object_or_404(Group, id=id)
     group.delete()
     return redirect('group')
