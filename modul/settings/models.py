@@ -1,8 +1,8 @@
 from django.db import models
 
 class Settings(models.Model):
-    opsi_key =  models.CharField(max_length=100)
-    opsi_val = models.CharField(max_length=150)
+    opsi_key =  models.CharField(max_length=100, verbose_name='Keterangan')
+    opsi_val = models.CharField(max_length=150, verbose_name='Deskripsi')
 
     class Meta:
         db_table = 'tbl_setting'

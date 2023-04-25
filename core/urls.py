@@ -32,6 +32,6 @@ urlpatterns = [
     path('akun/', include('modul.transaksi.urls')),
     path('pinjaman/', include('modul.pinjaman.urls')),
     path('kas/', include('modul.kas.urls')),
-
+    path('settings/', include('modul.settings.urls'))
 
 ]

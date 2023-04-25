@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import KasForm, Kas
 from django.contrib.auth.decorators import permission_required
+from modul.crud_params import CrudParams
 # Create your views here.
 
+paramater_kas = CrudParams('kas')
 modul = 'kas'
 crud = {
     'template': {
@@ -23,35 +25,23 @@ permission_required('kas.view_kas')
 def list_kas(request):
 
     kas = Kas.objects.all()
-    context= {
-        'data': kas,
-        'link': crud["url"],
-        'modul': modul
-    }
-    return render(request, crud['template']['list'], context)
+    context= paramater_kas.parameters(data=kas, kas=True, data_master=True) 
+    return render(request, 'kas/list_kas.html', context)
 
 def create_kas(request):
-
     form = KasForm()
 
     if request.method == 'GET':
-        context = {
-            'forms': form,
-            'modul': modul,
-            'action': 'Buat'
-
-        }
+        context = paramater_kas.parameters(form=form, modul=modul, action='Buat Data', kas=True, data_master=True)
+        
         return render(request, crud['template']['create'], context)
     elif request.method == 'POST':
         form = KasForm(request.POST)
-        context = {
-            'forms': form,
-            'modul': modul,
-            'action': 'Buat'
-        }
+        context = paramater_kas.parameters(form=form, modul=modul, action='Buat Data', kas=True, data_master=True)
+        
         if form.is_valid():
             form.save()
-            return redirect('kas')
+            return redirect('list-kas')
         else:
             return render(request, crud['template']['create'], context)
 
@@ -61,23 +51,14 @@ def edit_kas(request, id):
 
     if request.method =='GET':
         form = KasForm(instance=form_id)
-        context = {
-            'forms': form,
-            'id': id,
-            'modul': modul,
-            'action': 'Edit'
-        }
+        context = paramater_kas.parameters(kas=True, data_master=True, form=form, id=id, modul=modul, action='Edit Data') 
         return render(request, crud['template']['create'], context)
     elif request.method == 'POST':
         form =  KasForm(request.POST, instance=form_id)
-        context = {
-            'forms': form,
-            'modul': modul,
-            'action': 'Edit'
-        }
+        context = paramater_kas.parameters(form=form, modul=modul, action='Edit Data', kas=True, data_master=True)
         if form.is_valid():
             form.save()
-            return redirect('kas')
+            return redirect('list-kas')
         else:
             return render(request, crud['template']['create'], context)
 
@@ -86,5 +67,5 @@ def edit_kas(request, id):
 def delete_kas(request, id):
     form_id = get_object_or_404(Kas, id=id)
     form_id.delete()
-    return redirect('kas')
+    return redirect('list-kas')
 

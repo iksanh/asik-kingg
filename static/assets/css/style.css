@@ -1,12 +1,15 @@
 #container-area {
-    background-color: #292524;
+    background-color: #fafaf9;
 }
 
 
 .menu  a  span {
-    color: red;
+    color: #ef4444;
 }
 
 .nav-item a i , li a i {
-    color: red;
+    color: #ef4444;
+}
+.nav-item a i:hover , li a i:hover {
+    color: #fff;
 }

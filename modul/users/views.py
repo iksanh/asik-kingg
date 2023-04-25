@@ -50,7 +50,6 @@ class MyUserView(ListView):
     model = User
     template_name = 'users/user/list_user.html'
     context_object_name = 'data'
-
     extra_context = modul.params
 
 
