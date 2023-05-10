@@ -1,0 +1,98 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %}
+<!-- begin content -->
+{% block content%}
+<div class="row g-3 mb-4 align-items-center justify-content-between">
+  <div class="col-auto">
+    <h1 class="app-page-title mb-0">member</h1>
+  </div>
+  <div class="col-auto">
+    <div class="page-utilities">
+      <div
+        class="row g-2 justify-content-start justify-content-md-end align-items-center"
+      >
+        <div class="col-auto">
+          <a class="btn app-btn-primary" href="{% url links.list %}">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-plus"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+              ></path>
+            </svg>
+            Lihat Data
+          </a>
+        </div>
+      </div>
+      <!--//row-->
+    </div>
+    <!--//table-utilities-->
+  </div>
+  <!--//col-auto-->
+</div>
+
+<hr class="mb-4" />
+
+<div class="col-12 col-md-12">
+  <div class="app-card app-card-settings shadow-sm p-4">
+    <div class="app-card-body">
+      <form
+        class="settings-form"
+        method="post"
+        enctype="multipart/form-data"
+        novalidate
+      >
+        <div class="row align-items-center g-3">
+          <div class="col-md-6 mb-0">{{ form.nama|as_crispy_field }}</div>
+          <div class="col-md-6 mb-0">{{ form.identitas|as_crispy_field }}</div>
+        </div>
+        <div class="row align-items-center g-3">
+          <div class="col-md-4 mb-0">
+            {{ form.tempat_lahir|as_crispy_field }}
+          </div>
+          <div class="col-md-4 mb-0">
+            {{ form.tanggal_lahir|as_crispy_field }}
+          </div>
+          <div class="col-md-4 mb-0">
+            {{ form.jenis_kelamin|as_crispy_field }}
+          </div>
+        </div>
+        <div class="row align-items-center g-3">
+          <div class="col-md-4 mb-0">{{ form.agama|as_crispy_field }}</div>
+          <div class="col-md-4 mb-0">{{ form.pekerjaan|as_crispy_field }}</div>
+          <div class="col-md-4 mb-0">{{ form.status|as_crispy_field }}</div>
+        </div>
+        <div class="row align-items-center g-3">
+          <div class="col-md-4 mb-0">{{ form.jabatan|as_crispy_field }}</div>
+          <div class="col-md-4 mb-0">
+            {{ form.nomor_telpon|as_crispy_field }}
+          </div>
+          <div class="col-md-4 mb-0">
+            {{ form.departement|as_crispy_field }}
+          </div>
+        </div>
+        <div class="row align-items-center g-3">
+          <div class="col-md-4 mb-0">
+            <label class="form-label">Status Anggota</label>
+            {{form.aktif|as_crispy_field }}
+          </div>
+          <div class="col-md-4 mb-0">{{ form.photo|as_crispy_field }}</div>
+          <div class="col-md-4 mb-0">{{ form.kota|as_crispy_field }}</div>
+        </div>
+        {{form.alamat|as_crispy_field}} {% csrf_token %}
+
+        <button type="submit" class="btn app-btn-primary">Simpan</button>
+        <button type="reset" class="btn app-btn-secondary">Reset</button>
+      </form>
+    </div>
+    <!--//app-card-body-->
+  </div>
+  <!--//app-card-->
+</div>
+
+<!-- end content  -->
+{% endblock content%}

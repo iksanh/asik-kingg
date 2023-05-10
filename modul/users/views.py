@@ -3,17 +3,15 @@ from django.contrib.auth.models import Group, Permission, PermissionManager, Use
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-
 from django.views.generic.edit import FormView, UpdateView
-
 from .forms import RegisterUserForm, UpdateUserGroupForm
 from django.contrib.auth import login
-
 from django.views.generic import ListView, CreateView, DetailView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import  messages
 from modul.crud_params import CrudParams
-
+from modul.member.models import Member
+from django.http import HttpResponse
 # Create your views here.
 
 modul = CrudParams('users')
@@ -50,7 +48,7 @@ class MyUserView(ListView):
     model = User
     template_name = 'users/user/list_user.html'
     context_object_name = 'data'
-    extra_context = modul.params
+    extra_context = modul.parameters(users=True, data_master=True)
 
 
 
@@ -75,7 +73,7 @@ class MyUserUpdateView(UpdateView):
     # form_class = RegisterUserForm
 
     template_name = 'users/user/registration.html'
-    extra_context = modul.params
+    extra_context = modul.parameters(users=True, data_master=True, action='Update')
 
     def get_form_class(self):
         return RegisterUserForm
@@ -94,6 +92,18 @@ class MyUserUpdateGroup(MyUserUpdateView):
     def get_form_class(self):
         return UpdateUserGroupForm
 
+
+def create_member_user(request, id):
+    member = Member.objects.get(id=id)
+    user = User.objects.create_user(username=member.identitas, password=member.identitas)
+    user.save()
+
+    member.user = user
+    member.save()
+    # Member(user=user, instance=member).save()
+    # print(member.identitas)
+    return redirect('list-member')
+    # return HttpResponse(f"<h1>{member.identitas}</h1>")
 
 
 

@@ -12,6 +12,9 @@ class Departement(models.Model):
     class Meta:
         db_table = 'departement'
 
+    def __str__(self):
+        return self.nama_departement
+
 class FileRat(models.Model):
     nama = models.CharField(max_length=255, db_column='nama_file')
     file = models.FileField(upload_to='dokumen/file_rat', db_column='file_rat')

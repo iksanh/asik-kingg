@@ -1,15 +1,3 @@
-#container-area {
-    background-color: #fafaf9;
-}
-
-
-.menu  a  span {
-    color: #ef4444;
-}
-
-.nav-item a i , li a i {
-    color: #ef4444;
-}
-.nav-item a i:hover , li a i:hover {
-    color: #fff;
+.textarea {
+  height: auto;
 }

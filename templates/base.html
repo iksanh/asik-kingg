@@ -16,11 +16,8 @@
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media" />
     <link rel="shortcut icon" href="favicon.ico" />
 
-    <!-- FontAwesome JS-->
-    <script
-      defer
-      src="{% static 'assets/plugins/fontawesome/js/all.min.js' %}"
-    ></script>
+    
+    
 
     <!-- App CSS -->
     <link
@@ -28,6 +25,13 @@
       rel="stylesheet"
       href="{% static 'assets/css/portal.css'%}"
     />
+    <link
+      id="theme-style"
+      rel="stylesheet"
+      href="{% static 'assets/css/style.css'%}"
+    />
+    <!-- data table css  -->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
   </head>
 
   <body class="app">
@@ -68,11 +72,34 @@
     <script src="{% static 'assets/plugins/popper.min.js' %}"></script>
     <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js'%}"></script>
 
+    <!-- FontAwesome JS-->
+    <script
+      defer
+      src="{% static 'assets/plugins/fontawesome/js/all.min.js' %}"
+    ></script>
+
     <!-- Charts JS -->
     <script src="{% static 'assets/plugins/chart.js/chart.min.js'%}"></script>
-    <script src="{% static 'assets/js/index-charts.js'%}"></script>
+    <!-- <script src="{% static 'assets/js/index-charts.js'%}"></script> -->
 
     <!-- Page Specific JS -->
     <script src="{% static 'assets/js/app.js' %}"></script>
+
+    <!-- King JS -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+    <script>
+      const tabledata = document.querySelector('#member');
+      if(tabledata) {
+        const dataTable = new simpleDatatables.DataTable("#member", {
+      searchable: true,
+      fixedHeight: true,
+      });
+      }
+
+      // alert("hello");
+      
+    </script>
+    <script src="{% static 'assets/js/king-app.js' %}"></script>
   </body>
 </html>

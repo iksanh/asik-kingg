@@ -10,6 +10,7 @@ class Kas(models.Model):
     aktif = models.CharField(max_length=2, choices=Opsi.choices)
     simpanan = models.CharField(max_length=2, choices=Opsi.choices, db_column='tmpl_simpan')
     penarikan = models.CharField(max_length=2, choices=Opsi.choices, db_column='tmpl_penarikan')
+    pinjaman = models.CharField(max_length=2, choices=Opsi.choices, db_column='tmpl_pinjaman', default='Y')
     bayar = models.CharField(max_length=2, choices=Opsi.choices, db_column='tmpl_bayar')
     pemasukan = models.CharField(max_length=2, choices=Opsi.choices, db_column='tmpl_pemasukan')
     pengeluaran = models.CharField(max_length=2, choices=Opsi.choices, db_column='tmpl_pengeluaran')
@@ -17,5 +18,9 @@ class Kas(models.Model):
 
     class Meta:
         db_table = 'nama_kas_tbl'
+
+
+    def __str__(self):
+        return self.nama
 
 

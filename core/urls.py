@@ -32,6 +32,11 @@ urlpatterns = [
     path('akun/', include('modul.transaksi.urls')),
     path('pinjaman/', include('modul.pinjaman.urls')),
     path('kas/', include('modul.kas.urls')),
-    path('settings/', include('modul.settings.urls'))
+    path('settings/', include('modul.settings.urls')),
+    path('anggota/', include('modul.member.urls')),
+    path('pekerjaan/', include('modul.pekerjaan.urls')),
+    path('pemasok/', include('modul.pemasok.urls')),
+    path('barang/', include('modul.barang.urls'))
+    
 
 ]

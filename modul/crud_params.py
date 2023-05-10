@@ -1,3 +1,4 @@
+from django_enumfield import enum
 #untuk parameter crud
 
 class CrudParams:
@@ -54,4 +55,44 @@ class CrudParams:
 
 
 
-# print(CrudParams('Pinjaman').params)
+
+
+class Opsi():
+    PILIHAN_AKUN = (
+        ('Aktiva', 'AKTIVA'),
+        ('Pasiva', 'PASIVA')
+    )
+
+    LABA_RUGI = (
+        ('PENDAPATAN', 'PENDAPATAN'),
+        ('HPP', 'HPP'),
+        ('BIAYA', 'BIAYA'),
+        ('PINJAMAN', 'PINJAMAN')
+    )
+
+    YA_TIDAK = (
+        ('Y', 'YA'),
+        ('N', 'TIDAK')
+    )
+
+    AGAMA = (
+        ('ISLAM', 'ISLAM'),
+        ('KRISTEN', 'KRISTEN'),
+        ('KATOLIK', 'KATOLIK'),
+        ('BUDHA', 'BUDHA'),
+        ('HINDU', 'HINDU'),
+    )
+
+    JENIS_KELAMIN = (
+        ('L', 'LAKI-LAKI'),
+        ('P', 'PEREMPUAN')
+    )
+
+    STATUS_PERKAWINAN = (
+        ('belum kawin', 'belum kawin'),
+        ('kawin', 'kawin'),
+        ('cerai hidup', 'cerai hidup'),
+        ('cerai mati', 'cerai mati'),
+    )
+
+

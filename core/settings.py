@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'crispy_forms',
     "crispy_bootstrap5",
-
+    'reportlab',
+    # 'python-docx'
     #template
 
 
@@ -56,7 +57,10 @@ INSTALLED_APPS = [
     'modul.users',
     'modul.pinjaman',
     'modul.permissions',
-    'modul'
+    'modul',
+    'modul.pekerjaan',
+    'modul.pemasok',
+    'modul.barang',
 
 ]
 
@@ -137,9 +141,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'id'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Jakarta'
 
 USE_I18N = True
 
@@ -156,6 +162,10 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 #add media url 
 MEDIA_ROOT = [BASE_DIR / 'media']
+MEDIA_URL = 'media/'
+
+#add media profile 
+MEDIA_ROOT = 'media'
 MEDIA_URL = 'media/'
 
 # Default primary key field type

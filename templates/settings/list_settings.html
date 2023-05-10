@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+<!-- begin content -->
+{% block content %}
+<div class="container-xl">
+  <h1 class="app-page-title">Pengaturan Aplikasi</h1>
+  <hr class="mb-4" />
+  <div class="col-12 col-md-8">
+    <!-- begin looping -->
+    {% for settings in data %} 
+    {{settings.opsi_key}} {{settings.opsi_val}}
+    <!-- end looping -->
+    {%endfor %}
+  </div>
+</div>
+<!-- end content -->
+{% endblock content %}

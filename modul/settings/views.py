@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from modul.crud_params import CrudParams
 
 from django.views.generic import (
-    ListView, CreateView
+    ListView, CreateView, UpdateView
 )
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from .models import (
@@ -48,4 +48,29 @@ class CreateSettings(PermissionRequiredMixin, CreateView):
 
 
 
-# Create your views here. 
+# View Departement. 
+
+class DepartementView(ListView):
+    model = Departement
+    template_name = 'settings/departement/list_departement.html'
+    context_object_name = 'data'
+    extra_context = parameter_departement.parameters(data_master=True, departement=True)
+
+class DepartementCreate(CreateView):
+    model = Departement
+    template_name = 'settings/departement/create_departement.html'
+    fields = '__all__'
+    extra_context = parameter_departement.parameters(data_master=True, departement=True, action='Buat Data')
+    success_url = reverse_lazy('list-departement')  
+
+class DepartementUpdate(UpdateView):
+    model = Departement
+    fields = '__all__'
+    template_name = 'settings/departement/create_departement.html'
+    extra_context = parameter_departement.parameters(data_master=True, departement=True, action='Edit Data')
+    success_url = reverse_lazy('list-departement') 
+
+def departement_delete(request, id):
+    departement = get_object_or_404(Departement, id= id)
+    departement.delete()
+    return redirect('list-departement')

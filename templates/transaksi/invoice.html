@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Title</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                display: flex;
+                flex-direction: row;
+                justify-content: end;
+                align-items: flex-end;
+                text-align: right !important;
+            }
+            .title {
+                font-size: 16px;
+                /* font-weight: 100; */
+               /* text-align: right;*/
+               /* padding: 2px 20px 0px 20px;   */
+            }
+            .subtitle{
+                font-size: 12px;
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+        </style>
+    </head>
+    <body>
+        
+            <div class='header'>
+                <h2 class='title'>Koperasi Internet Network Gorontalo (KINGG)</h2>
+                <h3 class='subtitle'>Desa Permata Tilongkabila</h3>
+            </div>
+        
+            <hr class='hrItem' />
+        <div class='details'>
+            Tanggal Transaksi :  {{transfer.tanggal_catat}} <br/>
+            Nomor Transaksi :  TKD{{transfer.id}} <br/>
+            Dari: {{transfer.dari_kas.nama}} <br/>
+            Untuk Kas:  {{transfer.untuk_kas.nama}}<br/>
+            Jumlah:  {{transfer.jumlah}}<br/>
+            Terbilang: {{transfer.jumlah}}
+            <hr class='hrItem' />
+        </div>
+    </div>
+    </body>
+</html>

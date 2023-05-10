@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView, UpdateView
 from modul.crud_params import CrudParams
 from .forms import AkunForm, AngsuranForm
 from .models import Akun, Angsuran
+from enum import Enum
 
 # Create your views here.
 akun_params = CrudParams('akun')
@@ -88,3 +89,12 @@ def angsuran_delete(request, id):
     angsuran = get_object_or_404(Angsuran, id= id)
     angsuran.delete()
     return redirect('list-angsuran')
+
+class OpsiAkun(Enum):
+    PEMASUKAN = 'Pemasukan'
+    PENGELUARAN = 'Pengeluaran'
+    TRANSFER = 'Transfer'
+
+class DebitKredit(Enum):
+    DEBIT = 'D'
+    KREDIT = 'K'
