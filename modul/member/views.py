@@ -1,9 +1,11 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, View
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import PermissionRequiredMixin
+
+
 from .models import Member
 from modul.pekerjaan.models import Pekerjaan
 from modul.settings.models import Departement
@@ -85,6 +87,12 @@ class MemberUpdate(PermissionRequiredMixin, UpdateView):
     extra_context = member_param.parameters(data_master=True, member=True, action='Edit Data')
     success_url = reverse_lazy('list-member')
 
+class MemberListAPI(View):
+    
+    def get(self, req, *args,  **kwargs):
+        member = Member.objects.values('id','nama')
+        data  = list(member)
+        return JsonResponse(data, safe=False)
 
 
 def activate_member(request, id):
