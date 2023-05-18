@@ -315,12 +315,16 @@
           ><!--//nav-link-->
           <div
             id="submenu-data-simpanan"
-            class="collapse submenu submenu-data-simpanan"
+            class="collapse submenu submenu-data-simpanan {%if data_simpanan %}show {% endif %}"
             data-bs-parent="#menu-accordion"
           >
             <ul class="submenu-list list-unstyled">
               <li class="submenu-item">
-                <a class="submenu-link" href="login.html">Setoran Simpanan</a>
+                <a
+                  class="submenu-link {% if setor_simpanan %} active {% endif%}"
+                  href="{% url 'list-setor_simpanan'%}"
+                  >Setoran Simpanan</a
+                >
               </li>
               <li class="submenu-item">
                 <a class="submenu-link" href="signup.html"
