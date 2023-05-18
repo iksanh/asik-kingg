@@ -1,8 +1,19 @@
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.contrib.auth.decorators import permission_required
-from .forms import SimpananForm, Simpanan
+from django.contrib.auth.models import User
+from django.views.generic import ListView, UpdateView, CreateView
+from .forms import SimpananForm, Simpanan, TransaksiSetoranForm
+from .models import TransaksiSetoranSimpanan
+from modul.member.models import Member
 from modul.crud_params import CrudParams
+from modul.transaksi.views import DebitKredit,SetoranPenarikan
+
+
 simpanan_param = CrudParams('simpanan')
+modul_sp = CrudParams('setor_simpanan')
 
 # Create your views here.
 
@@ -49,3 +60,43 @@ def delete_simpanan(request, id):
 
 def tes(request):
     return render(request, 'simpanan/login.html', context={'data': 'data'})
+
+
+class SetoranSimpananView(ListView):
+    model = TransaksiSetoranSimpanan
+    context_object_name = 'data'
+    extra_context = modul_sp.parameters(data_simpanan=True, setor_simpanan=True, action='Lihat Data Setor Simpanan')
+
+class SetoranSimpananCreate(CreateView):
+    # model = TransaksiSetoranSimpanan
+    # fields = '__all__'
+    form_class = TransaksiSetoranForm
+    member = Member.objects.values('id', 'nama')
+    extra_context = modul_sp.parameters(data_simpanan=True, setor_simpanan=True, action='Tambah Data Setor Simpanan', data_member=member)
+    success_url = reverse_lazy('list-setor_simpanan')
+    
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        form.instance.user = User.objects.get(username=self.request.user)
+        form.instance.dk = DebitKredit.DEBIT.value
+        form.instance.akun = SetoranPenarikan.SETORAN.value
+        
+        return super().form_valid(form)
+
+class SetoranSimpananUpdate(UpdateView):
+     model = TransaksiSetoranSimpanan
+     form_class = TransaksiSetoranForm
+     extra_context = modul_sp.parameters(data_simpanan=True, setor_simpanan=True, action='Tambah Data Setor Simpanan')
+     success_url = reverse_lazy('list-setor_simpanan')
+    
+     def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        
+        form.instance.user = User.objects.get(username=self.request.user)
+        form.instance.dk = DebitKredit.DEBIT.value
+        form.instance.akun = SetoranPenarikan.SETORAN.value
+        return super().form_valid(form)
+
+def delete_setoran_simpanan(req, id):
+    setor_simpan = get_object_or_404(TransaksiSetoranSimpanan, id=id)
+    setor_simpan.delete()
+
+    return redirect('list-setor_simpanan')
