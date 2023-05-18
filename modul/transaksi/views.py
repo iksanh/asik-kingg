@@ -98,3 +98,7 @@ class OpsiAkun(Enum):
 class DebitKredit(Enum):
     DEBIT = 'D'
     KREDIT = 'K'
+
+class SetoranPenarikan(Enum):
+    SETORAN = 'Setoran'
+    PENARIKAN = 'Penarikan'
