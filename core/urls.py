@@ -15,6 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.conf.urls import handler404, handler500
+from modul.views import error_404
 
 
 
@@ -36,7 +40,18 @@ urlpatterns = [
     path('anggota/', include('modul.member.urls')),
     path('pekerjaan/', include('modul.pekerjaan.urls')),
     path('pemasok/', include('modul.pemasok.urls')),
-    path('barang/', include('modul.barang.urls'))
+    path('barang/', include('modul.barang.urls')),
+
+    #url handler 
+
     
+    # path('404/', customview404, name='custom404' )
 
 ]
+
+def error_404(request, exception):
+
+    return HttpResponse("<h1>Error</h1>")
+
+handler404 = 'modul.views.error_404'
+# handler500 = 'modul.views.server_error'
