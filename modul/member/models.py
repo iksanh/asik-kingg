@@ -28,3 +28,6 @@ class Member(models.Model):
     class Meta:
         db_table = 'tbl_anggota'
 
+
+    def __str__(self) -> str:
+        return f'{self.nama}'
