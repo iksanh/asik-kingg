@@ -15,21 +15,15 @@ def index(request):
 
     return render(request, 'dashboard.html', context)
 
-def forbidden(request, exception):
-    return render(request, 'forbidden.html', status=403)
-
-
-
-# Custom View
-
-# Custom View 404 
+def error_403(request, exception):
+    return render(request, 'custom/403.html')
 
 
 def error_404(req, exception):
     return render(req, 'custom/404.html')
 
-# def server_error(req, exception):
-#     return render(req, 'custom/404.html', status=500)
+def error_500(req, exception):
+    return render(req, 'custom/500.html')
 
 def portal(request):
     return render(request, 'index.html', {} )

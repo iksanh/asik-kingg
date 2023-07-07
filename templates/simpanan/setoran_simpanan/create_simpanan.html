@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content%}
+<h1 class="app-page-title">Simpanan</h1>
+<hr class="mb-4" />
+<div class="row g-4 settings-section">
+  <div class="col-12 col-md-4">
+    <h3 class="section-title">Tambah data</h3>
+    <div class="section-intro">
+      Modul simpanan digunakan untuk membuat, memperbaharui dan melihat data simpanan <a href="{% url 'simpanan' %}">Lihat data simpanan</a>
+    </div>
+  </div>
+  <div class="col-12 col-md-8">
+    <div class="app-card app-card-settings shadow-sm p-4">
+      <div class="app-card-body">
+        <form class="settings-form" method="post" novalidate>
+          <div class="row">
+            <div class="col-10"><input type="text" name="viewanggota" class="form-control" id="viewanggota" /></div>
+            <div class="col-2"><a class="btn btn-primary" id="pilih-anggota">Pilih </a></div>
+            <input type="hidden" name="anggota" id="anggota" />
+          </div>
+          <div class="mb-3">
+            {% csrf_token %} {{form|crispy}}
+
+            
+          <button type="submit" class="btn app-btn-primary">
+            Simpan {{parameter.coba}}
+          </button>
+        </form>
+      </div>
+      <!--//app-card-body-->
+    </div>
+    <!--//app-card-->
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal-member" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Data Anggota</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table app-table-hover mb-0 text-left" id="table-member">
+            <thead>
+              <tr>
+                <th scope="cell">#</th>
+                <th scope="cell">Nama</th>
+                <th scope="cell">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for data in data_member %}
+              <tr>
+                <td id="idmember{{forloop.counter}}">{{data.id}}</td>
+                <td id="namemember{{forloop.counter}}">{{data.nama}}</td>
+                <td><a class="btn app-btn-primary py-1 px-2" id="select-member">Pilih</a></td>
+              </tr>
+              {% endfor%}
+            </tbody>
+          </table>
+        </div>
+        My modal content goes here...
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+{% endblock content%}

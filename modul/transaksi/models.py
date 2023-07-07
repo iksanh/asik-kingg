@@ -2,6 +2,9 @@ from django.db import models
 from modul.transaksi.pilihan import Opsi as opsi
 from django.utils.translation import gettext_lazy as _
 from modul.kas.models import Kas
+from modul.member.models import Member
+from modul.simpanan.models import Simpanan
+
 from django.contrib.auth.models import User
 from datetime import datetime
 
@@ -58,4 +61,3 @@ class TransaksiKas(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, db_column='user_name')
 
     
-

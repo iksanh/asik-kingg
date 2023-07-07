@@ -30,8 +30,15 @@
       rel="stylesheet"
       href="{% static 'assets/css/style.css'%}"
     />
+    <link
+      id="theme-style"
+      rel="stylesheet"
+      href="{% static 'assets/css/dselect.css'%}"
+    />
     <!-- data table css  -->
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
   </head>
 
   <body class="app">
@@ -100,6 +107,9 @@
       // alert("hello");
       
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="{% static 'assets/js/dselect.js' %}"></script>
     <script src="{% static 'assets/js/king-app.js' %}"></script>
   </body>
 </html>

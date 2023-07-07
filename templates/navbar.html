@@ -327,7 +327,9 @@
                 >
               </li>
               <li class="submenu-item">
-                <a class="submenu-link" href="signup.html"
+                <a
+                  class="submenu-link {% if penarikan_simpanan%} active {% endif %}"
+                  href="{% url 'list-penarikan_simpanan'%}"
                   >Penarikan Simpanan</a
                 >
               </li>

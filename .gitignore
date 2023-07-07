@@ -128,3 +128,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/modul/pekerjaan/migrations/
+/modul/member/migrations/
+/modul/pemasok/migrations/
+/modul/settings/migrations/
+/modul/transaksi/migrations/
+/modul/kas/migrations/0002_kas_pinjaman.py
+/modul/barang/migrations/

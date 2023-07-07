@@ -11,9 +11,9 @@ from modul.crud_params import CrudParams
 # Create your views here.
 modul = CrudParams('group')
 
-class MyGroupView(PermissionRequiredMixin, ListView):
+class MyGroupView(ListView):
     #add permission
-    permission_required = 'group.add_group'
+    # permission_required = 'group.add_group'
     model = Group
     template_name = 'users/group/list_group.html'
     context_object_name = 'data'
@@ -21,10 +21,10 @@ class MyGroupView(PermissionRequiredMixin, ListView):
     extra_context = modul.params
 
 
-class MyGroupCreateView(PermissionRequiredMixin, FormView):
+class MyGroupCreateView(FormView):
     model = Group
     template_name ='users/group/create_group.html'
-    permission_required = 'group.view_group'
+    # permission_required = 'group.view_group'
     form_class = RegisterGropForm
     context_object_name = 'form'
     success_url = reverse_lazy('group')
@@ -34,8 +34,8 @@ class MyGroupCreateView(PermissionRequiredMixin, FormView):
         form.instance.user = self.request.user
         return super(MyGroupCreateView,self).form_valid(form)
 
-class MyGroupUpdateView(PermissionRequiredMixin,UpdateView):
-    permission_required = 'group.change_group'
+class MyGroupUpdateView(UpdateView):
+    # permission_required = 'group.change_group'
     model = Group
     form_class = RegisterGropForm
     template_name ='users/group/create_group.html'

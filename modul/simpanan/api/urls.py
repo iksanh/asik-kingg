@@ -4,6 +4,6 @@ from modul.simpanan.api import view
 
 
 urlpatterns = [
-    path('simpanan/', view.SimpananList.as_view()),
-    path('simpanan/<int:pk>/', view.SimpananDetail.as_view())
+    path('', view.SimpananList.as_view()),
+    path('<int:pk>/', view.SimpananDetail.as_view())
 ]

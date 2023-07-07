@@ -21,8 +21,8 @@ from datetime import datetime
 #create parameter
 member_param=CrudParams('member')
 
-class MemberView(PermissionRequiredMixin, ListView, FormView):
-    permission_required = ''
+class MemberView( ListView, FormView):
+    # permission_required = ''
     model = Member
     template_name = 'member/list_member.html'
     context_object_name = 'data'

@@ -17,17 +17,24 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.conf.urls import handler404, handler500
-from modul.views import error_404
+from django.conf.urls import handler404, handler500, handler403
+from modul.views import error_404, error_403
 
 
+urlapi =[
+    path('auth/', include('rest_framework.urls')),
+    path('simpanan/', include('modul.simpanan.api.urls')),
+    path('transaksi/', include('modul.transaksi.api.urls')),
+    path('kas/', include('modul.kas.api.urls')),
+]
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api-simpanan/', include('modul.simpanan.api.urls')),
-    path('api-transaksi/', include('modul.transaksi.api.urls')),
-    path('api-kas/', include('modul.kas.api.urls')),
+    # path('api-auth/', include('rest_framework.urls')),
+    # path('api-simpanan/', include('modul.simpanan.api.urls')),
+    # path('api-transaksi/', include('modul.transaksi.api.urls')),
+    # path('api-kas/', include('modul.kas.api.urls')),
+    path('api/', include(urlapi)),
     path('', include('modul.urls')),
 
     path('simpanan/', include('modul.simpanan.urls')),
@@ -42,16 +49,14 @@ urlpatterns = [
     path('pemasok/', include('modul.pemasok.urls')),
     path('barang/', include('modul.barang.urls')),
 
-    #url handler 
 
-    
-    # path('404/', customview404, name='custom404' )
 
 ]
 
-def error_404(request, exception):
-
-    return HttpResponse("<h1>Error</h1>")
+# def error_404(request, exception):
+#
+#     return HttpResponse("<h1>Error</h1>")
 
 handler404 = 'modul.views.error_404'
+handler403 = 'modul.views.error_403'
 # handler500 = 'modul.views.server_error'

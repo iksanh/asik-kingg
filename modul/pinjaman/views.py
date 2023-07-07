@@ -15,7 +15,7 @@ template_list = 'pinjaman/list_pinjaman.html'
 
 
 #function list pinjaman
-@permission_required('pinjaman.view_pinjaman')
+# @permission_required('pinjaman.view_pinjaman')
 def list_pinjaman(request):
     pinjaman  = Pinjaman.objects.all()
     context = pinjaman_param.parameters(data=pinjaman, data_master=True, pinjaman=True)
